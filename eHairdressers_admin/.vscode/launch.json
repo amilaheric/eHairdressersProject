@@ -1,0 +1,55 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "flutter_ehairdressers",
+            "cwd": "flutter_ehairdressers",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter_ehairdressers (profile mode)",
+            "cwd": "flutter_ehairdressers",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter_ehairdressers (release mode)",
+            "cwd": "flutter_ehairdressers",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter_ehairdressers_mobile",
+            "cwd": "flutter_ehairdressers_mobile",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter_ehairdressers_mobile (profile mode)",
+            "cwd": "flutter_ehairdressers_mobile",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter_ehairdressers_mobile (release mode)",
+            "cwd": "flutter_ehairdressers_mobile",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Flutter (lib\\main.dart)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "flutter_ehairdressers_mobile",
+            "program": "lib\\main.dart"
+        }
+    ]
+}
