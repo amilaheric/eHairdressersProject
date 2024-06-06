@@ -1,8 +1,11 @@
+import 'package:ehairdressers_mob/providers/appointment_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/cart_provider.dart';
 import 'providers/product_provider.dart';
+import 'providers/service_provider.dart';
+import 'providers/user_provider.dart';
 import 'screens/product_list_screen.dart';
 import 'utils/authorization.dart';
 
@@ -11,6 +14,9 @@ void main() {
     providers: [
       ChangeNotifierProvider(create: (_) => ProductProvider()),
       ChangeNotifierProvider(create: (_) => CartProvider()),
+      ChangeNotifierProvider(create: (_) => ServiceProvider()),
+      ChangeNotifierProvider(create: (_) => UserProvider()),
+      ChangeNotifierProvider(create: (_) => AppointmentProvider()),
     ],
     child: const MyApp(),
   ));
@@ -19,7 +25,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -65,7 +70,7 @@ class MyHomePage extends StatelessWidget {
             child: Column(
               children: [
                 Image(
-                  image: AssetImage('.dart_tool/assets/logo.png'),
+                  image: AssetImage('.dart_tool/assets/salonlogo.png'),
                   height: 270,
                   width: 270,
                 ),

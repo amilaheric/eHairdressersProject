@@ -8,6 +8,6 @@ namespace eHairdressers.Model.SearchObjects
 {
     public class AppointmentsSearchObject:BaseSearchObject
     {
-            public string AppointmentDate { get; set; }
+            public DateTime AppointmentDate { get; set; }
     }
 }

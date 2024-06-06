@@ -22,8 +22,6 @@ namespace eHairdressers.Services
             CreateMap<Database.Appointment, Model.Appointment>();
             CreateMap<Database.Service, Model.Service>();
 
-
-
             CreateMap<Model.Requests.ProductInsertRequest, Database.Products>();
             CreateMap<Model.Requests.AppointmentInsertRequest, Database.Appointment>();
             CreateMap<Model.Requests.AppointmentUpdateRequest, Database.Appointment>();

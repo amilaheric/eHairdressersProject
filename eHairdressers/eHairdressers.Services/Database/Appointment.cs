@@ -15,7 +15,10 @@ namespace eHairdressers.Services.Database
         public int EmployeeId { get; set; }
         public int UserId { get; set; }
         public int ServiceId { get; set; }
-        public string AppointmentDateTime { get; set; }
+        [Column(TypeName = "Date")]
+        public DateTime AppointmentDate { get; set; }
+        [Column(TypeName = "Time")]
+        public TimeSpan AppointmentTime { get; set; }
         public bool Approved { get; set; }
         public string Comment { get; set; }
 

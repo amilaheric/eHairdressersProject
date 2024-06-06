@@ -12,5 +12,6 @@ namespace eHairdressers.Services
     public interface IAppointmentService:ICRUDService<Model.Appointment, AppointmentsSearchObject, AppointmentInsertRequest, AppointmentUpdateRequest>
     {
         Task<List<Model.Appointment>> GetAppointmentsByUserIdAsync(int userId);
+        Task<List<TimeSpan>> GetAvailableTimes(DateTime date);
     }
 }

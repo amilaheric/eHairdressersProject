@@ -6,17 +6,11 @@ namespace eHairdressers.Services.Database
     {
         [Key]
         public int ReviewId { get; set; }
-
-        public int ProductId { get; set; }
-
-        public int CustomerId { get; set; }
-
-        public DateTime Date { get; set; }
-
-        public int Review { get; set; }
-
-        public virtual Customers Customer { get; set; } = null!;
-
-        public virtual Products Product { get; set; } = null!;
+        public int AppointmentId { get; set; }
+        public int? UserId { get; set; }
+        public string? Comment { get; set; }
+        public int? Rate { get; set; }
+        public virtual User? User { get; set; } = null!;
+        public virtual Appointment Appointment { get; set; } = null!;
     }
 }

@@ -1,4 +1,6 @@
+import 'package:ehairdressers_mob/screens/appointment_review_screen.dart';
 import 'package:flutter/material.dart';
+import '../screens/appointment_screen.dart';
 import '../screens/cart_screen.dart';
 import '../screens/product_list_screen.dart';
 
@@ -18,12 +20,17 @@ class _MasterScreenWidgetState extends State<MasterScreenWidget> {
       currentIndex = index;
     });
     if (currentIndex == 0) {
-      //Navigator.pushNamed(context, ProductListScreen.routeName);
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => ProductListScreen()));
     } else if (currentIndex == 1) {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => CartScreen()));
+    } else if (currentIndex == 2) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => AppointmentScreen()));
+    } else if (currentIndex == 3) {
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => AppointmentReviewScreen()));
     }
     ;
   }
@@ -40,7 +47,11 @@ class _MasterScreenWidgetState extends State<MasterScreenWidget> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: 'Cart')
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_bag), label: 'Cart'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_view_month), label: 'Appointment'),
+          BottomNavigationBarItem(icon: Icon(Icons.reviews), label: 'Reviews'),
         ],
         selectedItemColor: Color(0x0FFe5c89d),
         currentIndex: currentIndex,

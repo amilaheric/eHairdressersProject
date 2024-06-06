@@ -65,9 +65,7 @@ class _ProductInsertState extends State<ProductInsert> {
     categoryResult = await _categoryProvider.get();
     if (brandResult?.result != null) {
       for (var item in brandResult!.result!) {
-        // Access the properties of each item
-        print(item.id); // Example: accessing the 'name' property of the Product
-        // Perform any other operations with the item's properties
+        print(item.id);
       }
     }
 
@@ -87,9 +85,6 @@ class _ProductInsertState extends State<ProductInsert> {
         selectedImage = file;
         _base64Image = base64Encode(selectedImage!.readAsBytesSync());
       });
-    } else {
-      // User canceled the selection
-      // Handle accordingly
     }
   }
 

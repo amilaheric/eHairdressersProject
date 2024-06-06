@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ehairdressers_mob/models/appointment.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/io_client.dart';
 
+import '../models/search_result.dart';
 import '../utils/authorization.dart';
 
 abstract class BaseProvider<T> with ChangeNotifier {
@@ -43,6 +46,26 @@ abstract class BaseProvider<T> with ChangeNotifier {
     }
   }
 
+  Future<List<TimeOfDay>> getTime(String date, [dynamic additionalData]) async {
+    var url = Uri.parse("$_baseUrl$_endpoint/available-times?date=${date}");
+
+    Map<String, String> headers = createHeaders();
+
+    var response = await http!.get(url, headers: headers);
+    print(url);
+    if (isValidResponseCode(response)) {
+      var data = jsonDecode(response.body) as List<dynamic>;
+      return data.map((timeSpan) => _convertToTimeOfDay(timeSpan)).toList();
+    } else {
+      throw Exception("Exception... handle this gracefully");
+    }
+  }
+
+  TimeOfDay _convertToTimeOfDay(String timeSpan) {
+    var parts = timeSpan.split(':');
+    return TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
+  }
+
   Future<List<T>> get([dynamic search]) async {
     var url = "$_baseUrl$_endpoint";
 
@@ -62,6 +85,45 @@ abstract class BaseProvider<T> with ChangeNotifier {
       return data['result'].map((x) => fromJson(x)).cast<T>().toList();
     } else {
       throw Exception("Exception... handle this gracefully");
+    }
+  }
+
+  Future<SearchResult<T>> getResult({dynamic filter}) async {
+    var url = "$_baseUrl$_endpoint";
+    print(url);
+    if (filter != null) {
+      var queryString = getQueryString(filter);
+      url = "$url?$queryString";
+    }
+
+    var uri = Uri.parse(url);
+    var headers = createHeaders();
+
+    var response = await http!.get(uri, headers: headers);
+    if (isValidResponse(response)) {
+      var data = jsonDecode(response.body);
+      var result = SearchResult<T>();
+
+      result.count = data['count'];
+
+      for (var item in data['result']) {
+        result.result?.add(fromJson(item));
+        print(result);
+      }
+
+      return result;
+    } else
+      throw new Exception("Unknown error");
+  }
+
+  bool isValidResponse(Response response) {
+    if (response.statusCode < 299) {
+      return true;
+    } else if (response.statusCode == 401) {
+      throw new Exception("Unauthorized");
+    } else {
+      print(response.body);
+      throw new Exception("Something bad happened please try again");
     }
   }
 

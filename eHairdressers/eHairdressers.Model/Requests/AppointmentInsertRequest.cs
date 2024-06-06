@@ -11,7 +11,8 @@ namespace eHairdressers.Model.Requests
             public int? EmployeeId { get; set; }
             public int? UserId { get; set; }
             public int? ServiceId { get; set; }
-            public string? AppointmentDateTime { get; set; }
+            public string? AppointmentDate { get; set; }
+            public string? AppointmentTime { get; set; }
             public string Comment { get; set; }
 
         }

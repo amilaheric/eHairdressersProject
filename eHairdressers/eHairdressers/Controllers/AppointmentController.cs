@@ -22,6 +22,11 @@ namespace eHairdressers.Controllers
             return await _appointmentService.GetAppointmentsByUserIdAsync(userId);
         }
 
+        [HttpGet("available-times")]
+        public async Task<List<TimeSpan>> GetAvailableTimes(DateTime date)
+        {
+          return await _appointmentService.GetAvailableTimes(date);
+        }
 
     }
 }

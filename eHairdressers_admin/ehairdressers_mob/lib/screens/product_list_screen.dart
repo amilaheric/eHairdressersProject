@@ -24,7 +24,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _productProvider = context.read<ProductProvider>();
     _cartProvider = context.read<CartProvider>();

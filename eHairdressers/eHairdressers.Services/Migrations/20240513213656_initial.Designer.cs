@@ -12,7 +12,7 @@ using eHairdressers.Services.Database;
 namespace eHairdressers.Services.Migrations
 {
     [DbContext(typeof(eHairdressersContext))]
-    [Migration("20240424114913_initial")]
+    [Migration("20240513213656_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -33,9 +33,11 @@ namespace eHairdressers.Services.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentId"));
 
-                    b.Property<string>("AppointmentDateTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("AppointmentDate")
+                        .HasColumnType("Date");
+
+                    b.Property<TimeSpan>("AppointmentTime")
+                        .HasColumnType("Time");
 
                     b.Property<bool>("Approved")
                         .HasColumnType("bit");
@@ -402,23 +404,23 @@ namespace eHairdressers.Services.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"));
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int>("AppointmentId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("Rate")
                         .HasColumnType("int");
 
-                    b.Property<int>("Review")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("ReviewId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("AppointmentId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -677,21 +679,19 @@ namespace eHairdressers.Services.Migrations
 
             modelBuilder.Entity("eHairdressers.Services.Database.Reviews", b =>
                 {
-                    b.HasOne("eHairdressers.Services.Database.Customers", "Customer")
+                    b.HasOne("eHairdressers.Services.Database.Appointment", "Appointment")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("eHairdressers.Services.Database.Products", "Product")
+                    b.HasOne("eHairdressers.Services.Database.User", "User")
                         .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("Customer");
+                    b.Navigation("Appointment");
 
-                    b.Navigation("Product");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("eHairdressers.Services.Database.UserRole", b =>
